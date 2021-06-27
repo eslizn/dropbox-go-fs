@@ -1,15 +1,10 @@
 package dropbox
 
-import "io/fs"
+import (
+	"github.com/dropbox/dropbox-sdk-go-unofficial/v6/dropbox"
+	"github.com/dropbox/dropbox-sdk-go-unofficial/v6/dropbox/files"
+)
 
-type Dropbox struct {
-	Token string
-}
-
-func (db *Dropbox) Open(name string) (fs.File, error) {
-	return nil, nil
-}
-
-func New(token string) fs.FS {
-	return &Dropbox{Token: token}
+func New(token string) *FileSystem {
+	return &FileSystem{files.New(dropbox.Config{Token: token})}
 }
